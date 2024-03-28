@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Abstract {
-    public interface IEntity {
+namespace Core.Entites {
+    public interface IDto {
     }
 }
