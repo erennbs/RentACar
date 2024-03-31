@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Results;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -7,10 +8,13 @@ using Entities.DTOs;
 
 internal class Program {
     private static void Main(string[] args) {
+        CarTest();
+    }
+
+    private static void CarDetailTest() {
         CarManager carManager = new CarManager(new EfCarDal());
-        
-        foreach (CarDetailsDto car in carManager.GetCarWithDetails())
-        {
+
+        foreach (CarDetailsDto car in carManager.GetCarWithDetails().Data) {
             Console.WriteLine($"{car.CarName} - {car.ColorName} - {car.BrandName} - {car.DailyPrice}TL");
         }
     }
@@ -23,7 +27,7 @@ internal class Program {
         //brandManager.Delete(new Brand { Id = 7, Name = "Ferrari" });
 
 
-        foreach (Brand brand in brandManager.GetAll()) {
+        foreach (Brand brand in brandManager.GetAll().Data) {
             Console.WriteLine(brand.Name);
         }
     }
@@ -31,11 +35,15 @@ internal class Program {
     private static void ColorTest() {
         ColorManager colorManager = new ColorManager(new EfColorDal());
 
-        //colorManager.Add(new Color { Id = 6, Name = "Mor" });
-        //colorManager.Update(new Color { Id = 6, Name = "Fuşya" });
-        //colorManager.Delete(new Color { Id = 6, Name = "Fuşya" });
+        //IResult result = colorManager.Add(new Color { Id = 6, Name = "Mor" });
+        //IResult result = colorManager.Delete(new Color { Id = 6, Name = "Fuşya" });
+        //Console.WriteLine(result.Success);
+        //Console.WriteLine(result.Message);
 
-        foreach (Color color in colorManager.GetAll()) {
+
+        //colorManager.Update(new Color { Id = 6, Name = "Fuşya" });
+
+        foreach (Color color in colorManager.GetAll().Data) {
             Console.WriteLine(color.Name);
         }
     }
@@ -43,11 +51,15 @@ internal class Program {
     static void CarTest() {
         //InMemoryCarDal inMemoryCarDal = new InMemoryCarDal();
         EfCarDal efCarDal = new EfCarDal();
+        CarManager carManager = new CarManager(efCarDal);
 
-        //efCarDal.Add(new Car {BrandId = 3, ColorId = 1, DailyPrice = 6000, ModelYear = 2021, Description = "new car" });
+        //IResult result = carManager.Add(new Car { BrandId = 3, ColorId = 1, DailyPrice = 6000, ModelYear = 2021, Description = "a" });
+        //Console.WriteLine(result.Success);
+        //Console.WriteLine(result.Message);
+
         //efCarDal.Delete(new Car { Id = 8, BrandId = 3, ColorId = 1, DailyPrice = 6000, ModelYear = 2021, Description = "new car" });
 
-        efCarDal.Update(new Car { Id = 5, BrandId = 3, ColorId = 1, DailyPrice = 1200, ModelYear = 2021, Description = "Hyundai i30 2015" });
+        //efCarDal.Update(new Car { Id = 5, BrandId = 3, ColorId = 1, DailyPrice = 1200, ModelYear = 2021, Description = "Hyundai i30 2015" });
 
         foreach (Car car in efCarDal.GetAll()) {
             Console.WriteLine($"{car.Id} - {car.DailyPrice} - {car.Description}");
