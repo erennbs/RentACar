@@ -28,6 +28,8 @@ namespace Business.Constants {
         public static string UserDeleted = "Kullanıcı silindi";
         public static string UserUpdated = "Kullanıcı güncellendi";
         public static string UsersListed = "Kullanıcılar listelendi";
+        public static string InvalidUserEmail = "Email yanlış formatta";
+        public static string InvalidUserPassword = "Şifre en az sekiz haneli olmalı";
         
         public static string CustomerAdded = "Müşteri eklendi";
         public static string CustomerDeleted ="Müşteri silindi";

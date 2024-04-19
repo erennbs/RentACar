@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework {
-    public class EfRentalDal : EfEntityRepositoryBase<Rental, RentACarContext>{
+    public class EfRentalDal : EfEntityRepositoryBase<Rental, RentACarContext>, IRentalDal{
     }
 }

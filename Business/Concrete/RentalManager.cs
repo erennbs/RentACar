@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Results;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -9,7 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Concrete {
+namespace Business.Concrete
+{
     public class RentalManager : IRentalService{
         private readonly IRentalDal _rentalDal;
 
@@ -18,7 +20,8 @@ namespace Business.Concrete {
         }
 
         public IResult Add(Rental rental) {
-            if (rental.ReturnDate == null) {
+            Rental result = _rentalDal.Get(p => p.CarId ==  rental.CarId);
+            if (result != null && result.ReturnDate == null) { 
                 return new ErrorResult(Messages.RentalNotReturned);
             }
 

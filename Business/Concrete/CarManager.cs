@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 using Entities.DTOs;
 using Core.Results;
 using Business.Constants;
+using FluentValidation;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.Results;
 
-namespace Business.Concrete {
+namespace Business.Concrete
+{
     public class CarManager : ICarService {
 
         private ICarDal _carDal;
@@ -20,11 +25,7 @@ namespace Business.Concrete {
         }
 
         public IResult Add(Car car) {
-            if (car.Description.Length < 2) {
-                return new ErrorResult(Messages.InvalidCarName);
-            } else if (car.DailyPrice < 0) {
-                return new ErrorResult(Messages.InvalidCarPrice);
-            }
+            ValidationTool.Validate(new CarValidator(), car);
 
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
@@ -49,6 +50,10 @@ namespace Business.Concrete {
 
         public IDataResult<List<CarDetailsDto>> GetCarWithDetails() {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarsWithDetails());
+        }
+
+        public IDataResult<Car> GetById(int id) {
+            return new SuccessDataResult<Car>(_carDal.Get(p => p.Id == id));
         }
 
         public IResult Update(Car car) {
