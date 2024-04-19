@@ -1,5 +1,4 @@
 ﻿using Business.Concrete;
-using Core.Results;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -8,7 +7,32 @@ using Entities.DTOs;
 
 internal class Program {
     private static void Main(string[] args) {
-        CarTest();
+        EfCustomerDal efCustomerDal = new EfCustomerDal();
+        CustomerManager customerManager = new CustomerManager(efCustomerDal);
+
+        customerManager.Add(new Customer { UserId = 1, CompanyName = "Oto Alım Satım" });
+
+        foreach (Customer customer in customerManager.GetAll().Data) {
+            Console.WriteLine($"{customer.UserId} - {customer.CompanyName}");
+        }
+
+    }
+
+    private static void UserTest() {
+        EfUserDal efUserDal = new EfUserDal();
+        UserManager userManager = new UserManager(efUserDal);
+
+        //userManager.Add(new User { FirstName = "Eren", LastName = "Baş", Email = "eren@gmail.com", Password = "eren123" });
+        //userManager.Add(new User { FirstName = "User1", LastName = "u1", Email = "user1@gmail.com", Password = "user1" });
+        //userManager.Add(new User { FirstName = "User2", LastName = "u2", Email = "user2@gmail.com", Password = "user2" });
+
+        userManager.Delete(new User { Id = 4, FirstName = "Eren", LastName = "Baş", Email = "eren@gmail.com", Password = "eren123" });
+        userManager.Delete(new User { Id = 5, FirstName = "User1", LastName = "u1", Email = "user1@gmail.com", Password = "user1" });
+        userManager.Delete(new User { Id = 6, FirstName = "User2", LastName = "u2", Email = "user2@gmail.com", Password = "user2" });
+
+        foreach (User user in userManager.GetAll().Data) {
+            Console.WriteLine($"{user.Id} - {user.FirstName}");
+        }
     }
 
     private static void CarDetailTest() {
