@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,5 +43,22 @@ namespace Business.Constants {
         public static string RentalUpdated = "Kiralama güncellendi";
         public static string RentalsListed = "Kiralamalar listelendi";
         public static string RentalNotReturned = "Kiralanan araç teslim edilmedi";
+
+        public static string CarImageAdded = "Resim eklendi";
+        public static string CarImageDeleted = "Resim silindi";
+        public static string CarImageUpdated = "Resim güncellendi";
+        public static string CarImageListed = "Kiralamalar listelendi";
+        public static string CarImageUploadError = "Resim yüklenirken bir sorun oluştu";
+        public static string ImageAmountExceeds = "Resim sayısı 5'den fazla olamaz";
+        public static string CarImageNoFileExists = "Resim bulunamadı";
+        
+        public static string AuthorizationDenied = "Yetkiniz yok";
+        
+        public static string UserRegistered = "Kullanıcı başarıyla kayıt oldu";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Giriş başarılı";
+        public static string AccessTokenCreated = "Token oluşturuldu";
+        public static string EmailAlreadyExists = "Email kullanılıyor";
     }
 }

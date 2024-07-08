@@ -1,5 +1,6 @@
 ﻿using Business.Constants;
-using Entities.Concrete;
+using Core.Entities.Concrete;
+using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Business.ValidationRules.FluentValidation {
-    public class UserValidator : AbstractValidator<User> {
-        public UserValidator() {
+    public class UserForRegisterDtoValidator : AbstractValidator<UserForRegisterDto> {
+        public UserForRegisterDtoValidator() {
             RuleFor(p => p.FirstName).NotEmpty();
             RuleFor(p => p.LastName).NotEmpty();
             RuleFor(p => p.Email).Must(ValidateEmail).WithMessage(Messages.InvalidUserEmail);

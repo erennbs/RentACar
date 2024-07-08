@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -26,9 +27,9 @@ internal class Program {
         //userManager.Add(new User { FirstName = "User1", LastName = "u1", Email = "user1@gmail.com", Password = "user1" });
         //userManager.Add(new User { FirstName = "User2", LastName = "u2", Email = "user2@gmail.com", Password = "user2" });
 
-        userManager.Delete(new User { Id = 4, FirstName = "Eren", LastName = "Baş", Email = "eren@gmail.com", Password = "eren123" });
-        userManager.Delete(new User { Id = 5, FirstName = "User1", LastName = "u1", Email = "user1@gmail.com", Password = "user1" });
-        userManager.Delete(new User { Id = 6, FirstName = "User2", LastName = "u2", Email = "user2@gmail.com", Password = "user2" });
+        //userManager.Delete(new User { Id = 4, FirstName = "Eren", LastName = "Baş", Email = "eren@gmail.com", Password = "eren123" });
+        //userManager.Delete(new User { Id = 5, FirstName = "User1", LastName = "u1", Email = "user1@gmail.com", Password = "user1" });
+        //userManager.Delete(new User { Id = 6, FirstName = "User2", LastName = "u2", Email = "user2@gmail.com", Password = "user2" });
 
         foreach (User user in userManager.GetAll().Data) {
             Console.WriteLine($"{user.Id} - {user.FirstName}");

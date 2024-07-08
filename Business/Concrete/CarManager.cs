@@ -14,6 +14,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using Core.Aspects.Autofac.Validation;
+using Business.BusinessAspects.Autofac;
 
 namespace Business.Concrete
 {
@@ -36,6 +37,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [SecuredOperation("cars.list,admin")]
         public IDataResult<List<Car>> GetAll() {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }

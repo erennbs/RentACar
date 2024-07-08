@@ -6,34 +6,36 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPI.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase {
-        ICustomerService _customerService;
+    public class CarImagesController : ControllerBase {
 
-        public CustomersController(ICustomerService customerService) {
-            _customerService = customerService;
+        private readonly ICarImageService _carImageService;
+
+        public CarImagesController(ICarImageService carImageService) {
+            _carImageService = carImageService;
         }
 
-        [HttpGet]
-        public IActionResult GetAll() {
-            var result = _customerService.GetAll();
+        [HttpPost("upload")]
+        public IActionResult Upload(int carId, IFormFile file) {
+            var result = _carImageService.Add(carId, file);
+            if (result.Success) {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbycarid")]
+        public IActionResult Get(int carId) {
+            var result = _carImageService.GetImagesByCarId(carId);
             if (result.Success) {
                 return Ok(result);
             }
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Customer customer) {
-            var result = _customerService.Add(customer);
-            if (result.Success) {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpPut]
-        public IActionResult Update(Customer customer) {
-            var result = _customerService.Update(customer);
+        [HttpPut("update")]
+        public IActionResult Update(int id, IFormFile file) {
+            var result = _carImageService.Update(id, file);
             if (result.Success) {
                 return Ok(result);
             }
@@ -42,7 +44,7 @@ namespace WebAPI.Controllers {
 
         [HttpDelete]
         public IActionResult Delete(int id) {
-            var result = _customerService.Delete(new Customer { Id = id });
+            var result = _carImageService.Delete(id);
             if (result.Success) {
                 return Ok(result);
             }
