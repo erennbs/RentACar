@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,26 @@ namespace WebAPI.Controllers {
             }
             return BadRequest(result);
         }
+        
+        [HttpGet("getalldetails")]
+        public IActionResult GetAllWithDetails() {
+            var result = _rentalService.GetAllWithDetails();
+            if (result.Success) {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        
+        [HttpGet("getavailabledate")]
+        public IActionResult GetAvailablaDate(int carId) {
+            var result = _rentalService.GetAvailableDate(carId);
+            if (result.Success) {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
 
         [HttpPost("add")]
         public IActionResult Add(Rental rental) {
@@ -28,7 +49,7 @@ namespace WebAPI.Controllers {
             if (result.Success) {
                 return Ok(result);
             }
-            return BadRequest(result);
+            return NotFound(result);
         }
 
         [HttpPut]
