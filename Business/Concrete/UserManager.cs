@@ -4,6 +4,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,14 @@ namespace Business.Concrete {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
         }
 
+        public IDataResult<UserDto> GetById(int id) {
+            User user = _userDal.Get(u => u.Id == id);
+            return new SuccessDataResult<UserDto>(new UserDto { Id = user.Id, 
+                FirstName = user.FirstName, 
+                LastName = user.LastName
+            });
+        }
+
         public IDataResult<User> GetByMail(string email) {
             var result = _userDal.Get(user => user.Email == email);
             if (result == null) {
@@ -45,8 +54,12 @@ namespace Business.Concrete {
             return _userDal.GetClaims(user);
         }
 
-        public IResult Update(User user) {
-            _userDal.Update(user);
+        public IResult Update(UserDto user) {
+            User userToUpdate = _userDal.Get(u => u.Id == user.Id);
+            userToUpdate.FirstName = user.FirstName;
+            userToUpdate.LastName = user.LastName;
+
+            _userDal.Update(userToUpdate);
             return new SuccessResult(Messages.UserUpdated);
         }
     }
