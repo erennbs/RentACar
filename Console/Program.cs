@@ -1,7 +1,6 @@
 ﻿using Business.Concrete;
 using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using Entities.DTOs;
 
@@ -36,13 +35,13 @@ internal class Program {
         }
     }
 
-    private static void CarDetailTest() {
-        CarManager carManager = new CarManager(new EfCarDal());
+    //private static void CarDetailTest() {
+    //    CarManager carManager = new CarManager(new EfCarDal());
 
-        foreach (CarDetailsDto car in carManager.GetCarWithDetails().Data) {
-            Console.WriteLine($"{car.CarName} - {car.ColorName} - {car.BrandName} - {car.DailyPrice}TL");
-        }
-    }
+    //    foreach (CarDetailsDto car in carManager.GetCarWithDetails().Data) {
+    //        Console.WriteLine($"{car.CarName} - {car.ColorName} - {car.BrandName} - {car.DailyPrice}TL");
+    //    }
+    //}
 
     private static void BrandTest() {
         BrandManager brandManager = new BrandManager(new EfBrandDal());

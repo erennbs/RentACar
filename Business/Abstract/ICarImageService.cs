@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract {
     public interface ICarImageService {
-        public IResult Add(int carId, IFormFile file);
+        public IResult Add(CarImage carImage, IFormFile file);
         public IResult Delete(int id);
-        public IResult Update(int id, IFormFile file);
+        public IResult Update(CarImage carImage, IFormFile file);
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId);
+        public IResult DeleteByCarId(int carId);
     }
 }

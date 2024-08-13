@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 namespace Business.Abstract
 {
     public interface ICarService {
-        IResult Add(Car car);
+        IDataResult<Car> Add(Car car);
         IResult Delete(Car car);
         IResult Update(Car car);
         IDataResult<Car> GetById(int id);
         IDataResult<List<Car>> GetAll();
-        IDataResult<List<Car>> GetCarsByBrandId(int id);
-        IDataResult<List<Car>> GetCarsByColorId(int id);
-        IDataResult<List<CarDetailsDto>> GetCarWithDetails();
+        IDataResult<List<CarDetailsDto>> GetCarsByBrandId(int id);
+        IDataResult<List<CarDetailsDto>> GetCarsByColorId(int id);
+        IDataResult<CarDetailsDto> GetDetailsById(int id);
+        IDataResult<List<CarDetailsDto>> GetCarsWithDetails(string brandName, string colorName, string startDate, string endDate);
     }
 }
